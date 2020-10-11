@@ -1,0 +1,119 @@
+---
+title: "Code-Through---Wei"
+author: "Lin Wei"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    df_print: paged
+    theme: flatly
+    highlight: haddock
+    toc: yes
+    toc_float: yes
+---
+
+
+```{r , include=FALSE}
+knitr::opts_chunk$set( echo=TRUE, message=FALSE, warning=FALSE, fig.width=10 )
+```
+
+#In the , It mentiones the lubridate package is a fower tools for handling dates. In the analysis, it use funtion like month = lubridate::month(RDate) and year  = lubridate::year(RDate). I find more examples and functions in the lubridate library.
+```{r}
+#install.packages('lubridate')
+library("lubridate")     # Power tools for handling dates
+```
+
+#Creating date/times and From strings
+```{r}
+
+library(tidyverse)
+#library(nycflights13)
+
+today()
+dat<-now()
+
+ymd("2017-01-31")
+
+mdy("January 31st, 2017")
+
+dmy("31-Jan-2017")
+
+ymd_hms("2017-01-31 20:11:59")
+
+mdy_hm("01/31/2017 08:01")
+
+ymd(20170131, tz = "UTC")
+
+```
+
+# From other types
+```{r}
+
+as_datetime(dat)
+
+as_date(dat)
+
+as_datetime(60 * 60 * 10)
+
+as_date(365 * 10 + 2)
+
+
+```
+
+# Getting Date-time components
+```{r}
+year(dat)
+
+month(dat)
+
+wday(dat)
+
+yday(dat)
+
+month(dat, label = TRUE)
+
+wday(dat, label = TRUE, abbr = FALSE)
+
+hour(dat) <- hour(dat) + 1
+
+ymd("2015-02-01") %>% 
+  update(mday = 30)
+
+ymd("2015-02-01") %>% 
+  update(hour = 400)
+
+```
+
+# Durations
+
+```{r}
+h_age <- today() - ymd(19791014)
+h_age
+
+as.duration(h_age)
+
+dseconds(15)
+
+dminutes(10)
+
+dhours(c(12, 24))
+
+ddays(0:5)
+dweeks(3)
+
+dyears(1)
+
+```
+
+
+# Period
+
+```{r}
+one_pm <- ymd_hms("2016-03-12 13:00:00", tz = "America/New_York")
+
+one_pm
+
+one_pm + ddays(1)
+
+one_pm
+
+```
